@@ -1,0 +1,31 @@
+name: matrixp
+
+on:
+  push:
+    branches: [main]
+
+jobs: 
+  builds:
+    runs-on: ubuntu-latest
+    
+    permissions: 
+        contents: write
+
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run Script
+        run: python .matrix.py
+
+      - name: Commit and Push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with: 
+          commit_message: Matrix product solved!
+          commit_user_name: Oscar Martinez [GitHub Actions]
+          commit_author: Oscaretz
